@@ -12,28 +12,13 @@ namespace BocceBall.Models
     {
         public int ID { get; set; }
 
-        public int HomeTeamID { get; set; }
-        [NotMapped]
-        public Team HomeTeam
-        {
-            get
-            {
-                // TODO: @circular EF won't generate tables with "circular" FKs,
-                //       it is deemed circular since there is two FKs to the same table
-                return new BocceBallDb().Teams.Where(t => t.ID == this.HomeTeamID).First();
-            }
-        }
+        public int? HomeTeamID { get; set; }
+        //[ForeignKey("HomeTeamID")]
+        public IQueryable<Team> HomeTeams { get; set; }
 
-        public int AwayTeamID { get; set; }
-        [NotMapped]
-        public Team AwayTeam
-        {
-            get
-            {
-                // TODO: @circular
-                return new BocceBallDb().Teams.Where(t => t.ID == this.AwayTeamID).First();
-            }
-        }
+        public int? AwayTeamID { get; set; }
+        //[ForeignKey("AwayTeamID")]
+        public IQueryable<Team> AwayTeams { get; set; }
 
         public int HomeScore { get; set; }
         public int AwayScore { get; set; }
@@ -45,7 +30,9 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.HomeScore >= this.AwayScore ? HomeTeam : AwayTeam;
+                return this.HomeScore >= this.AwayScore 
+                    ? this.HomeTeams.First(t => t.ID == this.HomeTeamID) 
+                    : this.AwayTeams.First(t => t.ID == this.HomeTeamID);
             }
         }
 
@@ -54,7 +41,9 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.Winner == this.HomeTeam ? this.AwayTeam : this.HomeTeam;
+                return this.Winner.ID == this.HomeTeamID 
+                    ? this.AwayTeams.First(t => t.ID == this.AwayTeamID)
+                    : this.HomeTeams.First(t => t.ID == this.HomeTeamID);
             }
         }
 
@@ -70,7 +59,7 @@ namespace BocceBall.Models
 
         public override string ToString()
         {
-            return $"Game: H:{this.HomeTeam} vs A:{this.AwayTeam} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
+            return $"Game: H:{this.HomeTeams} vs A:{this.AwayTeams} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
         }
     }
 }

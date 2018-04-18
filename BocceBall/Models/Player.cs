@@ -10,7 +10,7 @@ namespace BocceBall.Models
     {
         public int ID { get; set; }
 
-        public int TeamID { get; set; }
+        public int? TeamID { get; set; }
         public Team Team { get; set; }
 
         public string FullName { get; set; }
