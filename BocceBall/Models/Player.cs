@@ -20,7 +20,7 @@ namespace BocceBall.Models
 
         public override string ToString()
         {
-            return FullName;
+            return $"{this.FullName} ({this.Nickname})";
         }
     }
 }

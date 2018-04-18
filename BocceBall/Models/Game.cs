@@ -30,7 +30,9 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.HomeScore >= this.AwayScore ? HomeTeam : AwayTeam;
+                return this.HomeScore >= this.AwayScore 
+                    ? HomeTeam 
+                    : AwayTeam;
             }
         }
 
@@ -39,7 +41,9 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.Winner == this.HomeTeam ? this.AwayTeam : this.HomeTeam;
+                return this.Winner == this.HomeTeam 
+                    ? this.AwayTeam 
+                    : this.HomeTeam;
             }
         }
 
@@ -55,7 +59,9 @@ namespace BocceBall.Models
 
         public override string ToString()
         {
-            return $"Game: H:{this.HomeTeam} vs A:{this.AwayTeam} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
+            return $"Game: H:{this.HomeTeam} vs A:{this.AwayTeam}" +
+                $" -- Score: H:{this.HomeScore} - A:{this.AwayScore}" +
+                $" -- Date:{this.Date}";
         }
     }
 }

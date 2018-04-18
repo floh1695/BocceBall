@@ -118,7 +118,7 @@ namespace BocceBall
                     ThrowingArm = randomElement(new[] { "left", "right" }),
                 };
             }
-            db.Players.AddRange(Enumerable.Range(0, numberOfTeams * 6).Select(i => randomPlayer())); // TODO:  @initializelist
+            db.Players.AddRange(Enumerable.Range(0, numberOfTeams * 6).Select(i => randomPlayer())); // TODO: @initializelist
             db.SaveChanges();
 
             Game randomGame()
@@ -133,7 +133,7 @@ namespace BocceBall
                     Date = DateTime.Today.AddDays(rnd.Next(-7, 7)),
                 };
             }
-            db.Games.AddRange(Enumerable.Range(0, numberOfTeams * 6).Select(i => randomGame())); // TODO:  @initializelist
+            db.Games.AddRange(Enumerable.Range(0, numberOfTeams * 6).Select(i => randomGame())); // TODO: @initializelist
             db.SaveChanges();
         }
 
