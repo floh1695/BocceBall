@@ -14,8 +14,8 @@ namespace BocceBall.Contexts
             : base("BocceBall")
         { }
 
-        DbSet<Player> Players;
-        DbSet<Team> Teams;
-        DbSet<Game> Games;
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Game> Games { get; set; }
     }
 }

@@ -12,10 +12,32 @@ namespace BocceBall.Models
         public int ID { get; set; }
 
         public int HomeTeamID { get; set; }
-        public Team HomeTeam { get; set; }
+        [NotMapped]
+        public Team HomeTeam
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public int AwayTeamID { get; set; }
-        public Team AwayTeam { get; set; }
+        [NotMapped]
+        public Team AwayTeam
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public int HomeScore { get; set; }
         public int AwayScore { get; set; }

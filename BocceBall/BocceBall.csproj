@@ -50,6 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\BocceBallDb.cs" />
+    <Compile Include="Migrations\201804180012425_Initial.cs" />
+    <Compile Include="Migrations\201804180012425_Initial.Designer.cs">
+      <DependentUpon>201804180012425_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804180024265_CorrectionRemovedTeamDirectConnections.cs" />
+    <Compile Include="Migrations\201804180024265_CorrectionRemovedTeamDirectConnections.Designer.cs">
+      <DependentUpon>201804180024265_CorrectionRemovedTeamDirectConnections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804180030191_ReaddedAndUnmappedTeams.cs" />
+    <Compile Include="Migrations\201804180030191_ReaddedAndUnmappedTeams.Designer.cs">
+      <DependentUpon>201804180030191_ReaddedAndUnmappedTeams.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
@@ -60,6 +72,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804180012425_Initial.resx">
+      <DependentUpon>201804180012425_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180024265_CorrectionRemovedTeamDirectConnections.resx">
+      <DependentUpon>201804180024265_CorrectionRemovedTeamDirectConnections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180030191_ReaddedAndUnmappedTeams.resx">
+      <DependentUpon>201804180030191_ReaddedAndUnmappedTeams.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
