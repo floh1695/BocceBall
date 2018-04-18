@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,12 @@ namespace BocceBall.Models
         {
             get
             {
-                return new BocceBallDb().Games.ToList(/* Force eval */).Where(g => g.Winner.ID == this.ID).Count();
+                return new BocceBallDb()
+                    .Games
+                    .Include(g => g.HomeTeam)
+                    .Include(g => g.AwayTeam)
+                    .ToList(/* Force eval */)
+                    .Count(g => g.Winner.ID == this.ID);
             }
         }
 
@@ -29,7 +35,12 @@ namespace BocceBall.Models
         {
             get
             {
-                return new BocceBallDb().Games.ToList(/* Force eval */).Where(g => g.Loser.ID == this.ID).Count();
+                return new BocceBallDb()
+                    .Games
+                    .Include(g => g.HomeTeam)
+                    .Include(g => g.AwayTeam)
+                    .ToList(/* Force eval */)
+                    .Count(g => g.Loser.ID == this.ID);
             }
         }
 

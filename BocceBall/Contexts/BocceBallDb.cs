@@ -17,7 +17,11 @@ namespace BocceBall.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Game>()
-                //.HasOptional<Team>(g => g.HomeTeams)
+                .HasOptional<Team>(g => g.HomeTeam)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Game>()
+                .HasOptional<Team>(g => g.AwayTeam)
                 .WithMany()
                 .WillCascadeOnDelete(false);
         }

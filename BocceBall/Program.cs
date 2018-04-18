@@ -34,13 +34,21 @@ namespace BocceBall
             }
 
             Console.WriteLine("Upcoming games");
-            foreach (var upcomingGame in db.Games.ToList(/* Force eval */).Where(g => !g.Happened))
+            foreach 
+                (var upcomingGame 
+                in db.Games
+                    .ToList(/* Force eval */)
+                    .Where(g => !g.Happened))
             {
                 Console.WriteLine(upcomingGame);
             }
 
             Console.WriteLine("Past games");
-            foreach (var pastGame in db.Games.ToList(/* Force eval*/).Where(g => g.Happened))
+            foreach 
+                (var pastGame 
+                in db.Games
+                    .ToList(/* Force eval */)
+                    .Where(g => g.Happened))
             {
                 Console.WriteLine(pastGame);
             }

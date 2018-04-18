@@ -14,11 +14,11 @@ namespace BocceBall.Models
 
         public int? HomeTeamID { get; set; }
         //[ForeignKey("HomeTeamID")]
-        public IQueryable<Team> HomeTeams { get; set; }
+        public Team HomeTeam { get; set; }
 
         public int? AwayTeamID { get; set; }
         //[ForeignKey("AwayTeamID")]
-        public IQueryable<Team> AwayTeams { get; set; }
+        public Team AwayTeam { get; set; }
 
         public int HomeScore { get; set; }
         public int AwayScore { get; set; }
@@ -30,9 +30,7 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.HomeScore >= this.AwayScore 
-                    ? this.HomeTeams.First(t => t.ID == this.HomeTeamID) 
-                    : this.AwayTeams.First(t => t.ID == this.HomeTeamID);
+                return this.HomeScore >= this.AwayScore ? HomeTeam : AwayTeam;
             }
         }
 
@@ -41,9 +39,7 @@ namespace BocceBall.Models
         {
             get
             {
-                return this.Winner.ID == this.HomeTeamID 
-                    ? this.AwayTeams.First(t => t.ID == this.AwayTeamID)
-                    : this.HomeTeams.First(t => t.ID == this.HomeTeamID);
+                return this.Winner == this.HomeTeam ? this.AwayTeam : this.HomeTeam;
             }
         }
 
@@ -59,7 +55,7 @@ namespace BocceBall.Models
 
         public override string ToString()
         {
-            return $"Game: H:{this.HomeTeams} vs A:{this.AwayTeams} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
+            return $"Game: H:{this.HomeTeam} vs A:{this.AwayTeam} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
         }
     }
 }
