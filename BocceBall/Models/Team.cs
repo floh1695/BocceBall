@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BocceBall.Contexts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
+                return new BocceBallDb().Games.ToList(/* Force eval */).Where(g => g.Winner.ID == this.ID).Count();
             }
         }
 
@@ -28,8 +29,13 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
+                return new BocceBallDb().Games.ToList(/* Force eval */).Where(g => g.Loser.ID == this.ID).Count();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Color} {this.Mascot}";
         }
     }
 }

@@ -16,9 +16,22 @@ namespace BocceBall
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Bocce Ball Database Manager!");
-            InsertTestData();
+
+            //InsertTestData(); // NOTE: Uncomment if you want to add additional junk data, I only ran it once for my testing
 
             var db = new BocceBallDb();
+
+            Console.WriteLine("Win/Lose record");
+            foreach (var team in db.Teams)
+            {
+                Console.WriteLine($"{team} -- {team.Wins}/{team.Losses}");
+            }
+
+            Console.WriteLine("Player list");
+            foreach (var player in db.Players.Include(p => p.Team))
+            {
+                Console.WriteLine($"{player} of the {player.Team}");
+            }
 
             Console.WriteLine("Upcoming games");
             foreach (var upcomingGame in db.Games.ToList(/* Force eval */).Where(g => !g.Happened))
@@ -26,7 +39,13 @@ namespace BocceBall
                 Console.WriteLine(upcomingGame);
             }
 
-            ReadLineIfDebug();
+            Console.WriteLine("Past games");
+            foreach (var pastGame in db.Games.ToList(/* Force eval*/).Where(g => g.Happened))
+            {
+                Console.WriteLine(pastGame);
+            }
+
+            //ReadLineIfDebug(); // NOTE: I have to run the program from the command line to see the output after running my database migration
         }
 
         static void InsertTestData()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BocceBall.Contexts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,11 +18,9 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                // TODO: @circular EF won't generate tables with "circular" FKs,
+                //       it is deemed circular since there is two FKs to the same table
+                return new BocceBallDb().Teams.Where(t => t.ID == this.HomeTeamID).First();
             }
         }
 
@@ -31,11 +30,8 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                // TODO: @circular
+                return new BocceBallDb().Teams.Where(t => t.ID == this.AwayTeamID).First();
             }
         }
 
@@ -49,7 +45,16 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
+                return this.HomeScore >= this.AwayScore ? HomeTeam : AwayTeam;
+            }
+        }
+
+        [NotMapped]
+        public Team Loser
+        {
+            get
+            {
+                return this.Winner == this.HomeTeam ? this.AwayTeam : this.HomeTeam;
             }
         }
 
@@ -58,8 +63,14 @@ namespace BocceBall.Models
         {
             get
             {
-                throw new NotImplementedException();
+                // I say [happening] is closer to [happened] than it would be to [hasn't happened yet]
+                return this.Date <= DateTime.Today;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Game: H:{this.HomeTeam} vs A:{this.AwayTeam} -- Score: H:{this.HomeScore} - A:{this.AwayScore} -- Date:{this.Date}";
         }
     }
 }

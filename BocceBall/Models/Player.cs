@@ -18,5 +18,9 @@ namespace BocceBall.Models
         public int Number { get; set; }
         public string ThrowingArm { get; set; }
 
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }
